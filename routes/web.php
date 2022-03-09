@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\DetailPlanController;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\ProfileController;
 
 
 /*
@@ -16,14 +18,28 @@ use App\Http\Controllers\DetailPlanController;
 |
 */
 
+
+
 Route::prefix('admin')->group(function(){
+
+    Route::get('/', [SiteController::class, 'index'])->name('site.index');
+
+    Route::get('permissions/create', [PermissionController::class, 'create'])->name('permissions.create');
+    Route::get('permissions', [PermissionController::class, 'index'])->name('permissions.index');
+
+
+    /**
+     * Routes Profiles
+     */
+    Route::get('profiles/create', [ProfileController::class, 'create'])->name('profiles.create');
+    Route::get('profiles', [ProfileController::class, 'index'])->name('profiles.index');
 
     /**
      * Routes Details Plans
      */
-
-    Route::post('plans/{url}/details', [DetailPlanController::class, 'store'])->name('details.plan.store');
     Route::get('plans/{url}/details/create', [DetailPlanController::class, 'create'])->name('details.plan.create');
+    Route::post('plans/{url}/details', [DetailPlanController::class, 'store'])->name('details.plan.store');
+
     Route::get('plans/{url}/details', [DetailPlanController::class, 'index'])->name('details.plan.index');
 
     /**
@@ -48,9 +64,3 @@ Route::prefix('admin')->group(function(){
 });
 
 
-
-
-
-Route::get('/', function () {
-    return view('welcome');
-});

@@ -33,6 +33,7 @@ class DetailPlanController extends Controller
 
     public function create($urlPlan)
     {
+
         if (!$plan = $this->plan->where('url', $urlPlan)->first()){
             return redirect()->back();
         }
@@ -43,7 +44,7 @@ class DetailPlanController extends Controller
 
     public function store(Request $request)
     {
-       /*  dd($request->all()); */
-       /*  return view('admin.pages.plans.details.store'); */
+
+      dd($request->all());
     }
 }

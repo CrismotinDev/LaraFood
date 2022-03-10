@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\DetailPlan;
 use App\Models\Plan;
 use Illuminate\Http\Request;
@@ -46,5 +47,18 @@ class DetailPlanController extends Controller
     {
 
       dd($request->all());
+    }
+
+    public function edit($url)
+    {
+
+        $details = $this->repository->where('url', $url)->first();
+
+        if(!$details)
+        return redirect()->back();
+
+        return view ('admin.pages.plans.edit', [
+            'plan' =>$details
+        ]);
     }
 }

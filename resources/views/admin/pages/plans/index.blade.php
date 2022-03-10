@@ -6,7 +6,7 @@
     <h1>Planos <a href="{{ route('plans.create')}}" class="btn btn-dark"><i class="fas fa-plus-square"> ADD</i></a></h1>
 
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('admin.index')}}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('plans.index')}}">Dashboard</a></li>
         <li class="breadcrumb-item active"><a href="{{ route('plans.index')}}" class="">Planos</a></li>
     </ol>
 

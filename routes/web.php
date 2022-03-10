@@ -1,10 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PlanController;
 use App\Http\Controllers\DetailPlanController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PermissionController;
+
+
 
 
 /*
@@ -21,19 +24,32 @@ use App\Http\Controllers\ProfileController;
 
 
 Route::prefix('admin')->group(function(){
+
+   /*  Route::get('/welcome', [SiteController::class, 'index'])->name('site.index'); */
+    Route::resource('/log', [SiteController::class]);
+
+    Route::resource('profiles', [ProfileController::class]);
+
+
     Route::get('permissions/create', [PermissionController::class, 'create'])->name('permissions.create');
     Route::get('permissions', [PermissionController::class, 'index'])->name('permissions.index');
-    /**
-     * Routes Profiles
-     */
-    Route::get('profiles/create', [ProfileController::class, 'create'])->name('profiles.create');
-    Route::get('profiles', [ProfileController::class, 'index'])->name('profiles.index');
-    /**
+
+     /**
      * Routes Details Plans
      */
     Route::get('plans/{url}/details/create', [DetailPlanController::class, 'create'])->name('details.plan.create');
+    Route::get('plans/{url}/details/edit', [DetailPlanController::class, 'edit'])->name('details.plan.edit');
     Route::post('plans/{url}/details', [DetailPlanController::class, 'store'])->name('details.plan.store');
     Route::get('plans/{url}/details', [DetailPlanController::class, 'index'])->name('details.plan.index');
+
+
+    /**
+     * Routes Profiles
+     */
+   /*  Route::resource('profiles', [ProfileController::class]); */
+/*     Route::get('profiles/create', [ProfileController::class, 'create'])->name('profiles.create');
+    Route::get('profiles', [ProfileController::class, 'index'])->name('profiles.index'); */
+
     /**
      * Routes Plans
      */
@@ -45,12 +61,15 @@ Route::prefix('admin')->group(function(){
     Route::get('plans/{url}', [PlanController::class, 'show'])->name('plans.show');
     Route::post('plans', [PlanController::class, 'store'])->name('plans.store');
     Route::get('plans', [PlanController::class, 'index'])->name('plans.index');
+
+
+
     /**
      * Home Dash
      */
 
     Route::get('/', [PlanController::class, 'index'])->name('admin.index');
-    Route::get('/', [SiteController::class, 'index'])->name('site.index');
+
 
 });
 

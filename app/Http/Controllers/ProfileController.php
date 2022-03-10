@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Models\Profile;
+use App\Http\Controllers\Controller;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -22,7 +23,7 @@ class ProfileController extends Controller
     {
         $profiles = $this->repository->paginate();
 
-        return view('admin.pages.profiles.index', compact('profiles'));
+        return view('admin.pages.plans.profiles.index', compact('profiles'));
     }
 
     /**
@@ -32,7 +33,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.plans.profiles.create');
     }
 
     /**
@@ -43,7 +44,9 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->repository->create($request->all());
+
+        return redirect()->route('profiles.index');
     }
 
     /**
@@ -65,7 +68,12 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+
+       if(!$profile = $this->repository->find($id)){
+           return redirect()->back();
+       }
+       return view ('admin.pages.plans.profiles.edit' , compact('profile'));
+
     }
 
     /**
@@ -77,7 +85,12 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(!$profile = $this->repository->find($id)){
+            return redirect()->back();
+        }
+
+        $profile->update($request->all());
+       return redirect()->route('profiles.index');
     }
 
     /**

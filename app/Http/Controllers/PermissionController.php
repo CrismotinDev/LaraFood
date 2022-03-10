@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdatePermission;
-use App\Models\Models\Permission;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
@@ -24,7 +25,7 @@ class PermissionController extends Controller
     {
         $permissions = $this->repository->paginate();
 
-        return view('admin.pages.permissions.index', compact('permissions'));
+        return view('admin.pages.plans.permissions.index', compact('permissions'));
     }
 
     /**

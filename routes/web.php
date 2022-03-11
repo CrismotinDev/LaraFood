@@ -6,9 +6,7 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PermissionController;
-
-
-
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,14 +19,19 @@ use App\Http\Controllers\PermissionController;
 |
 */
 
-
-
 Route::prefix('admin')->group(function(){
 
    /*  Route::get('/welcome', [SiteController::class, 'index'])->name('site.index'); */
-    Route::resource('/log', [SiteController::class]);
+
 
     Route::resource('profiles', [ProfileController::class]);
+
+    /**
+     * routes caterforias
+     */
+    /* Route::any('categories/search', [CategoryController::class, 'search'])->name('categories.search'); */
+    Route::resource('categories', [CategoryController::class]);
+
 
 
     Route::get('permissions/create', [PermissionController::class, 'create'])->name('permissions.create');
@@ -42,14 +45,6 @@ Route::prefix('admin')->group(function(){
     Route::post('plans/{url}/details', [DetailPlanController::class, 'store'])->name('details.plan.store');
     Route::get('plans/{url}/details', [DetailPlanController::class, 'index'])->name('details.plan.index');
 
-
-    /**
-     * Routes Profiles
-     */
-   /*  Route::resource('profiles', [ProfileController::class]); */
-/*     Route::get('profiles/create', [ProfileController::class, 'create'])->name('profiles.create');
-    Route::get('profiles', [ProfileController::class, 'index'])->name('profiles.index'); */
-
     /**
      * Routes Plans
      */
@@ -62,9 +57,7 @@ Route::prefix('admin')->group(function(){
     Route::post('plans', [PlanController::class, 'store'])->name('plans.store');
     Route::get('plans', [PlanController::class, 'index'])->name('plans.index');
 
-
-
-    /**
+/**
      * Home Dash
      */
 
@@ -73,5 +66,5 @@ Route::prefix('admin')->group(function(){
 
 });
 
-
+    Route::get('/', [SiteController::class, 'index'])->name('site.home');
 

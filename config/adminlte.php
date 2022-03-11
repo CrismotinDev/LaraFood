@@ -252,7 +252,23 @@ return [
         [
             'text' => 'Empresas',
             'url'  => 'admin/tenants',
-            'icon' => 'fas fa-lock',
+            'icon' => 'fas fa-building',
+
+
+        ],
+
+        [
+            'text' => 'Usuários',
+            'url'  => 'admin/tenants',
+            'icon' => 'fas fa-users',
+
+
+        ],
+
+        [
+            'text' => 'Categorias',
+            'url'  => 'admin/categories',
+            'icon' => 'fas fa-layer-group',
 
 
         ],
